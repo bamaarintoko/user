@@ -1,4 +1,4 @@
-package com.kamadjajax;
+package com.mlskoding.kamadjajax;
 
 import com.facebook.react.ReactActivity;
 

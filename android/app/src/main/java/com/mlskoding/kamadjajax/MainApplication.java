@@ -1,4 +1,4 @@
-package com.kamadjajax;
+package com.mlskoding.kamadjajax;
 
 import android.app.Application;
 
