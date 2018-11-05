@@ -5,7 +5,7 @@ import {Header} from "../../Component/Header"
 import {StyleSheet, View, Dimensions} from "react-native"
 import {connect} from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 let {width, height} = Dimensions.get('window')
 
 class ScreenCreate extends Component {
@@ -31,99 +31,99 @@ class ScreenCreate extends Component {
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"street-view"} size={30} color={"#D50000"}/>
+                                    <Icon name={"street-view"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Pick Up Location</Text>
-                            <Text note>Rp 500.000</Text>
+                            <Text style={styles.text_title}>Pick Up Location</Text>
+                            <Text style={styles.text_note} note>Rp 500.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"map-marker"} size={30} color={"#D50000"}/>
+                                    <Icon name={"map-marker"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Drop Off Location</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Drop Off Location</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"picture-o"} size={20} color={"#D50000"}/>
+                                    <Icon name={"picture-o"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Item Image</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Item Image</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"archive"} size={20} color={"#D50000"}/>
+                                    <Icon name={"archive"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Item Description</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Item Description</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"car"} size={20} color={"#D50000"}/>
+                                    <Icon name={"car"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Select Vehicle</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Select Vehicle</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"sticky-note-o"} size={20} color={"#D50000"}/>
+                                    <Icon name={"sticky-note-o"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Additional Services</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Additional Services</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
                                 <View style={styles.icn}>
-                                    <Icon name={"calendar"} size={20} color={"#D50000"}/>
+                                    <Icon name={"calendar"} size={wp("5%")} color={"#D50000"}/>
                                 </View>
                             </Left>
                             <Body>
-                            <Text>Select Date</Text>
-                            <Text note>Rp 50.000</Text>
+                            <Text style={styles.text_title}>Select Date</Text>
+                            <Text style={styles.text_note} note>Rp 50.000</Text>
                             </Body>
                             <Right>
-                                <Icon name={"chevron-right"} size={20} color={"#D50000"}/>
+                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                     </List>
@@ -137,8 +137,14 @@ class ScreenCreate extends Component {
 }
 
 const styles = StyleSheet.create({
+    text_title:{
+      fontSize: hp("2.8%")
+    },
+    text_note:{
+      fontSize: hp("2.5%")
+    },
     icn: {
-        width: 30, justifyContent: 'center', alignItems: 'center'
+        width: wp("7%"), justifyContent: 'center', alignItems: 'center'
     },
     welcome: {
         fontSize: 20,
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: width,
-        height: 150,
+        height: hp("20%"),
     }
 });
 

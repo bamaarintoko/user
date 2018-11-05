@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {StyleSheet, View} from "react-native"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RNPickerSelect from 'react-native-picker-select';
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 class ScreenOrder extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +66,7 @@ class ScreenOrder extends Component {
                 <Header title={"Order"}/>
                 <View style={{flexDirection: 'row', padding: 15, backgroundColor: "#FFF"}}>
                     <View style={{flex: 1}}>
-                        <Text>Date :</Text>
+                        <Text style={style.text_date}>Date :</Text>
                         <View style={{borderWidth: 2, borderRadius: 5}}>
                             <RNPickerSelect
                                 placeholder={{
@@ -94,7 +94,7 @@ class ScreenOrder extends Component {
                         </View>
                     </View>
                     <View style={{flex: 1}}>
-                        <Text style={{marginLeft:5}}>Status :</Text>
+                        <Text style={style.text_status}>Status :</Text>
                         <View style={{borderWidth: 2, borderRadius: 5, marginLeft:5}}>
                             <RNPickerSelect
                                 placeholder={{
@@ -127,32 +127,32 @@ class ScreenOrder extends Component {
                     <List>
                         <ListItem avatar>
                             <Left>
-                                <Icon name={"archive"} size={30} color={"#D50000"}/>
+                                <Icon name={"archive"} size={hp("4%")} color={"#D50000"}/>
                             </Left>
                             <Body>
-                            <Text>Order Number : ######</Text>
-                            <Text note>Origin : </Text>
-                            <Text note>Destination : </Text>
-                            <Text note>Driver : </Text>
-                            <Text note>Car Number : </Text>
+                            <Text style={style.text_order}>Order Number : ######</Text>
+                            <Text style={style.text_order} note>Origin : </Text>
+                            <Text style={style.text_order} note>Destination : </Text>
+                            <Text style={style.text_order} note>Driver : </Text>
+                            <Text style={style.text_order} note>Car Number : </Text>
                             </Body>
                             <Right>
-                                <Icon name={"check-square-o"} size={20} color={"#D50000"}/>
+                                <Icon name={"check-square-o"} size={hp("3%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                         <ListItem avatar>
                             <Left>
-                                <Icon name={"archive"} size={30} color={"#D50000"}/>
+                                <Icon name={"archive"} size={hp("4%")} color={"#D50000"}/>
                             </Left>
                             <Body>
-                            <Text>Order Number : ######</Text>
-                            <Text note>Origin : </Text>
-                            <Text note>Destination : </Text>
-                            <Text note>Driver : </Text>
-                            <Text note>Car Number : </Text>
+                            <Text style={style.text_order}>Order Number : ######</Text>
+                            <Text style={style.text_order} note>Origin : </Text>
+                            <Text style={style.text_order} note>Destination : </Text>
+                            <Text style={style.text_order} note>Driver : </Text>
+                            <Text style={style.text_order} note>Car Number : </Text>
                             </Body>
                             <Right>
-                                <Icon name={"check-square-o"} size={20} color={"#D50000"}/>
+                                <Icon name={"check-square-o"} size={hp("3%")} color={"#D50000"}/>
                             </Right>
                         </ListItem>
                     </List>
@@ -166,16 +166,27 @@ class ScreenOrder extends Component {
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
-        paddingTop: 13,
-        paddingHorizontal: 10,
-        paddingBottom: 12,
         borderWidth: 1,
         borderColor: 'gray',
         borderRadius: 4,
         backgroundColor: 'white',
         color: 'black',
-    },
+    }
+
 });
+const style = StyleSheet.create({
+    text_order:{
+        fontSize: hp("2.4%")
+    },
+    text_date:{
+        fontSize: hp("2.4%"),
+        marginRight: 5
+    },
+    text_status:{
+        fontSize: hp("2.4%"),
+        marginLeft:5
+    }
+})
 
 function mapStateToProps() {
     return {}
