@@ -10,6 +10,12 @@ import {
 import {connect} from 'react-redux';
 
 class SplashScreen extends Component {
+    componentDidMount() {
+        setTimeout(() => {
+            this.props.navigation.navigate("Menu");
+
+        }, 2000)
+    }
 
     render() {
         return (
