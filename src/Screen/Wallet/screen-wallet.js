@@ -1,12 +1,17 @@
 import React,{Component} from "react"
-import {Container,Text} from "native-base"
+import {Container,Text,Content} from "native-base"
+import {Header} from "../../Component/Header"
 import {connect} from "react-redux";
 
 class ScreenWallet extends Component{
     render(){
         return(
             <Container>
-                <Text>Wallet</Text>
+                <Header title={"Wallet"}/>
+                <Content style={{margin:15}}>
+                    <Text>Wallet</Text>
+
+                </Content>
             </Container>
         )
     }

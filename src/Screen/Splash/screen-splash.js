@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Container, Content} from "native-base";
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {
-    Platform,
+    Platform, StatusBar,
     StyleSheet,
     Text,
     View
@@ -20,6 +20,7 @@ class SplashScreen extends Component {
     render() {
         return (
             <Container>
+                <StatusBar backgroundColor="#B00020"/>
                 <View style={styles.container}>
                     <MapView
                         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
