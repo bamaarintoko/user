@@ -27,7 +27,7 @@ export const Home = createBottomTabNavigator({
     tabBarOptions: {
         activeTintColor: '#000',
         labelStyle: {
-            fontSize: 10,
+            fontSize: 14,
         },
         style: {
             backgroundColor: '#FFF',

@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import {Container,Text,Content} from "native-base"
+import {Container, Text, Content, Item,Input,Button} from "native-base"
 import {Header} from "../../Component/Header"
 import {connect} from "react-redux";
 class ScreenHome extends Component{
@@ -8,8 +8,12 @@ class ScreenHome extends Component{
             <Container>
                 <Header title={"Home"}/>
                 <Content style={{margin:15}}>
-                <Text>Home</Text>
-
+                    <Item regular>
+                        <Input placeholder='Order Number' />
+                    </Item>
+                    <Button block style={{backgroundColor:"#D50000", marginTop:10}}>
+                        <Text>Track</Text>
+                    </Button>
                 </Content>
 
             </Container>
