@@ -7,6 +7,10 @@ import {connect} from "react-redux";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Modal from "react-native-modal";
+import RNGooglePlaces from 'react-native-google-places';
+
+let GOOGLE_MAPS_APIKEY = "AIzaSyCJf2cmsLing8mvifAQo9LR9o_ubFbedIA";
+import MapViewDirections from 'react-native-maps-directions';
 
 let {width, height} = Dimensions.get('window')
 
@@ -15,10 +19,57 @@ class ScreenCreate extends Component {
         super(props);
         this.state = {
             isModalVisible: false,
-            isModalDropOff: false
+            isModalDropOff: false,
+            pick_loc: {latitude: -7.797068, longitude: 110.370529},
+            pick_address: "-",
+            dest_loc: null,
+            dest_address: "-"
         }
     }
 
+    openPickUpModal = () => {
+        return () => {
+            RNGooglePlaces.openPlacePickerModal({
+                latitude: -7.797068,
+                longitude: 110.370529,
+                latitudeDelta: 0.015,
+                longitudeDelta: 0.0121,
+                radius: 1 // 10 meters
+            })
+                .then((place) => {
+                    this.setState({
+                        pick_loc: {latitude: place.latitude, longitude: place.longitude},
+                        pick_address: place.address
+                    })
+                    // console.log(place);
+                    // place represents user's selection from the
+                    // suggestions and it is a simplified Google Place object.
+                })
+                .catch(error => console.log(error.message));  // error is a Javascript Error object
+        }
+    }
+
+    openDropOffModal = () => {
+        return () => {
+            RNGooglePlaces.openPlacePickerModal({
+                latitude: -7.797068,
+                longitude: 110.370529,
+                latitudeDelta: 0.015,
+                longitudeDelta: 0.0121,
+                radius: 1 // 10 meters
+            })
+                .then((place) => {
+                    this.setState({
+                        dest_loc: {latitude: place.latitude, longitude: place.longitude},
+                        dest_address: place.address
+                    })
+                    console.log(place);
+                    // place represents user's selection from the
+                    // suggestions and it is a simplified Google Place object.
+                })
+                .catch(error => console.log(error.message));  // error is a Javascript Error object
+        }
+    }
     _toggleModal = () => {
 
         return () => {
@@ -45,6 +96,7 @@ class ScreenCreate extends Component {
     }
 
     render() {
+        console.log("===>", this.state.dest_loc)
         return (
             <Container>
                 <Header title={"Create Order"}/>
@@ -53,12 +105,45 @@ class ScreenCreate extends Component {
                         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                         style={styles.map}
                         region={{
-                            latitude: -7.797068,
-                            longitude: 110.370529,
+                            latitude: this.state.pick_loc.latitude,
+                            longitude: this.state.pick_loc.longitude,
                             latitudeDelta: 0.015,
                             longitudeDelta: 0.0121,
                         }}
                     >
+                        <MapView.Marker
+                            coordinate={{
+                                latitude: this.state.pick_loc.latitude,
+                                longitude: this.state.pick_loc.longitude
+                            }}
+                        />
+                        {
+                            this.state.dest_loc !== null
+                            &&
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: this.state.dest_loc.latitude,
+                                    longitude: this.state.dest_loc.longitude
+                                }}
+                            />
+                        }
+                        {
+                            this.state.dest_loc !== null
+                            &&
+                            <MapViewDirections
+                                origin={{
+                                    latitude: this.state.pick_loc.latitude,
+                                    longitude: this.state.pick_loc.longitude
+                                }}
+                                destination={{
+                                    latitude: this.state.dest_loc.latitude,
+                                    longitude: this.state.dest_loc.longitude
+                                }}
+                                strokeColor={"#B00020"}
+                                strokeWidth={3}
+                                apikey={GOOGLE_MAPS_APIKEY}
+                            />
+                        }
                     </MapView>
                 </View>
                 {/*MODAL PICK UP*/}
@@ -77,7 +162,7 @@ class ScreenCreate extends Component {
                 {/*END MODAL*/}
                 <Content style={{margin: 15}}>
                     <List>
-                        <TouchableWithoutFeedback onPress={this._toggleModal()}>
+                        <TouchableWithoutFeedback onPress={this.openPickUpModal()}>
                             <ListItem avatar>
                                 <Left>
                                     <View style={styles.icn}>
@@ -86,28 +171,28 @@ class ScreenCreate extends Component {
                                 </Left>
                                 <Body>
                                 <Text style={styles.text_title}>Pick Up Location</Text>
-                                <Text style={styles.text_note} note>Rp 500.000</Text>
+                                <Text style={styles.text_note} note>{this.state.pick_address}</Text>
                                 </Body>
                                 <Right>
                                     <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
                                 </Right>
                             </ListItem>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={this.toggleDropOff()}>
-                        <ListItem avatar>
-                            <Left>
-                                <View style={styles.icn}>
-                                    <Icon name={"map-marker"} size={wp("5%")} color={"#D50000"}/>
-                                </View>
-                            </Left>
-                            <Body>
-                            <Text style={styles.text_title}>Drop Off Location</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
-                            </Body>
-                            <Right>
-                                <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
-                            </Right>
-                        </ListItem>
+                        <TouchableWithoutFeedback onPress={this.openDropOffModal()}>
+                            <ListItem avatar>
+                                <Left>
+                                    <View style={styles.icn}>
+                                        <Icon name={"map-marker"} size={wp("5%")} color={"#D50000"}/>
+                                    </View>
+                                </Left>
+                                <Body>
+                                <Text style={styles.text_title}>Drop Off Location</Text>
+                                <Text style={styles.text_note} note>{this.state.dest_address}</Text>
+                                </Body>
+                                <Right>
+                                    <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
+                                </Right>
+                            </ListItem>
                         </TouchableWithoutFeedback>
                         <ListItem avatar>
                             <Left>
@@ -117,7 +202,7 @@ class ScreenCreate extends Component {
                             </Left>
                             <Body>
                             <Text style={styles.text_title}>Item Image</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
+                            <Text style={styles.text_note} note>-</Text>
                             </Body>
                             <Right>
                                 <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
@@ -131,7 +216,7 @@ class ScreenCreate extends Component {
                             </Left>
                             <Body>
                             <Text style={styles.text_title}>Item Description</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
+                            <Text style={styles.text_note} note>-</Text>
                             </Body>
                             <Right>
                                 <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
@@ -145,7 +230,7 @@ class ScreenCreate extends Component {
                             </Left>
                             <Body>
                             <Text style={styles.text_title}>Select Vehicle</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
+                            <Text style={styles.text_note} note>-</Text>
                             </Body>
                             <Right>
                                 <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
@@ -159,7 +244,7 @@ class ScreenCreate extends Component {
                             </Left>
                             <Body>
                             <Text style={styles.text_title}>Additional Services</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
+                            <Text style={styles.text_note} note>-</Text>
                             </Body>
                             <Right>
                                 <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
@@ -173,7 +258,7 @@ class ScreenCreate extends Component {
                             </Left>
                             <Body>
                             <Text style={styles.text_title}>Select Date</Text>
-                            <Text style={styles.text_note} note>Rp 50.000</Text>
+                            <Text style={styles.text_note} note>-</Text>
                             </Body>
                             <Right>
                                 <Icon name={"chevron-right"} size={wp("5%")} color={"#D50000"}/>
