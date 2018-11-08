@@ -11,8 +11,6 @@ export const Header = ({title}) => {
                 flexDirection: 'row',
                 height: 50,
                 backgroundColor: '#FFF',
-                borderBottomColor: '#BDBDBD',
-                borderBottomWidth: 1
             }}>
                 {/*<View style={{flex: 1,}}>*/}
 

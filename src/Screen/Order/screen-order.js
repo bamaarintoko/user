@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {Container, Text, Content, ListItem, List, Left, Body, Right, Form, Item, Picker} from "native-base"
+import {Container, Text, Content, ListItem, List, Left, Body, Right} from "native-base"
 import {Header} from "../../Component/Header"
 import {connect} from "react-redux";
 import {StyleSheet, View} from "react-native"

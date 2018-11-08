@@ -8,11 +8,16 @@ import {
     View
 } from 'react-native';
 import {connect} from 'react-redux';
-
+import { StackActions, NavigationActions } from 'react-navigation';
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'Menu' })],
+});
 class SplashScreen extends Component {
     componentDidMount() {
         setTimeout(() => {
-            this.props.navigation.navigate("Menu");
+            this.props.navigation.dispatch(resetAction);
+            // this.props.navigation.navigate("Menu");
 
         }, 2000)
     }
@@ -22,17 +27,7 @@ class SplashScreen extends Component {
             <Container>
                 <StatusBar backgroundColor="#B00020"/>
                 <View style={styles.container}>
-                    <MapView
-                        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                        style={styles.map}
-                        region={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.015,
-                            longitudeDelta: 0.0121,
-                        }}
-                    >
-                    </MapView>
+                    <Text style={styles.welcome}>KamadjajaX</Text>
                 </View>
             </Container>
         )
